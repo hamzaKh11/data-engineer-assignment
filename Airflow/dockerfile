@@ -1,0 +1,18 @@
+FROM apache/airflow:latest
+
+USER root
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get -y install git firefox-esr wget && \
+    apt-get clean
+
+# Install geckodriver
+RUN wget -O /usr/local/bin/geckodriver https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+RUN tar -xvzf /usr/local/bin/geckodriver -C /usr/local/bin/
+
+# Switch to the airflow user
+USER airflow
+
+# Install Python dependencies
+RUN pip install --no-cache-dir apache-airflow selenium urllib3 bs4 pymongo

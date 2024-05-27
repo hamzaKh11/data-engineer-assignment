@@ -1,0 +1,10 @@
+pymongo
+fastapi
+pydantic
+typing
+pandas
+uvicorn
+scikit-learn
+streamlit
+requests
+spacy

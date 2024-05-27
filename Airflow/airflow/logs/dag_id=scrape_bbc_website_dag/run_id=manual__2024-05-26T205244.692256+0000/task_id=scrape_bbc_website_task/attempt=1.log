@@ -1,0 +1,42 @@
+[2024-05-26T20:53:28.379+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-05-26T20:53:28.592+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: scrape_bbc_website_dag.scrape_bbc_website_task manual__2024-05-26T20:52:44.692256+00:00 [queued]>
+[2024-05-26T20:53:28.673+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: scrape_bbc_website_dag.scrape_bbc_website_task manual__2024-05-26T20:52:44.692256+00:00 [queued]>
+[2024-05-26T20:53:28.675+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-05-26T20:53:28.791+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scrape_bbc_website_task> on 2024-05-26 20:52:44.692256+00:00
+[2024-05-26T20:53:28.806+0000] {standard_task_runner.py:63} INFO - Started process 351 to run task
+[2024-05-26T20:53:28.811+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'scrape_bbc_website_dag', 'scrape_bbc_website_task', 'manual__2024-05-26T20:52:44.692256+00:00', '--job-id', '41', '--raw', '--subdir', 'DAGS_FOLDER/welcome_dag.py', '--cfg-path', '/tmp/tmp0qp46ndd']
+[2024-05-26T20:53:28.815+0000] {standard_task_runner.py:91} INFO - Job 41: Subtask scrape_bbc_website_task
+[2024-05-26T20:53:28.984+0000] {task_command.py:426} INFO - Running <TaskInstance: scrape_bbc_website_dag.scrape_bbc_website_task manual__2024-05-26T20:52:44.692256+00:00 [running]> on host 701b5a94ba50
+[2024-05-26T20:53:29.255+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='scrape_bbc_website_dag' AIRFLOW_CTX_TASK_ID='scrape_bbc_website_task' AIRFLOW_CTX_EXECUTION_DATE='2024-05-26T20:52:44.692256+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-05-26T20:52:44.692256+00:00'
+[2024-05-26T20:53:29.258+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-05-26T20:53:29.707+0000] {logging_mixin.py:188} INFO - WebDriverException: Message: Process unexpectedly closed with status 1
+[2024-05-26T20:53:35.070+0000] {logging_mixin.py:188} INFO - WebDriverException: Message: Process unexpectedly closed with status 1
+[2024-05-26T20:53:40.514+0000] {logging_mixin.py:188} INFO - WebDriverException: Message: Process unexpectedly closed with status 1
+[2024-05-26T20:53:45.517+0000] {logging_mixin.py:188} INFO - Max retries exceeded. Unable to scrape website.
+[2024-05-26T20:53:45.518+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-05-26T20:53:45.519+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/welcome_dag.py", line 39, in scrape_bbc_website
+    driver.get("https://www.bbc.com/")
+    ^^^^^^
+UnboundLocalError: cannot access local variable 'driver' where it is not associated with a value
+[2024-05-26T20:53:45.546+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=scrape_bbc_website_dag, task_id=scrape_bbc_website_task, run_id=manual__2024-05-26T20:52:44.692256+00:00, execution_date=20240526T205244, start_date=20240526T205328, end_date=20240526T205345
+[2024-05-26T20:53:45.607+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 41 for task scrape_bbc_website_task (cannot access local variable 'driver' where it is not associated with a value; 351)
+[2024-05-26T20:53:45.659+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-05-26T20:53:45.721+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-26T20:53:45.728+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
